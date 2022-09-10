@@ -9,6 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@expo/webpack-config": "^0.17.0",
+    "@monchilin/react-native-dropdown": "^0.2.3",
     "@react-navigation/drawer": "^6.4.4",
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/native-stack": "^6.8.0",
@@ -16,9 +18,12 @@
     "eslint-plugin-react-native": "^4.0.0",
     "expo": "~46.0.9",
     "expo-status-bar": "~1.4.0",
+    "install": "^0.13.0",
+    "npm": "^8.19.1",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-native": "0.69.5",
+    "react-native-element-dropdown": "^2.3.0",
     "react-native-reanimated": "~2.9.1",
     "react-native-web": "~0.18.7"
   },
@@ -34,6 +39,7 @@
     "eslint-plugin-n": "^15.2.5",
     "eslint-plugin-promise": "^6.0.1",
     "eslint-plugin-react": "^7.31.6",
+    "resize-observer-polyfill": "^1.5.1",
     "typescript": "^4.8.2"
   },
   "private": true
