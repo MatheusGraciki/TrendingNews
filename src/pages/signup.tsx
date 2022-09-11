@@ -1,12 +1,15 @@
 //import liraries
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import * as React from 'react';
+import { View, StyleSheet } from 'react-native';
+import SelectCountryScreen from '../components/dropdown';
+
 
 // create a component
 const SignUp = () => {
     return (
         <View style={styles.container}>
-            <Text>SignUp</Text>
+            <SelectCountryScreen/>
+
         </View>
     );
 };
@@ -23,3 +26,4 @@ const styles = StyleSheet.create({
 
 //make this component available to the app
 export default SignUp;
+
