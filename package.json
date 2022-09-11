@@ -11,6 +11,7 @@
   "dependencies": {
     "@expo/webpack-config": "^0.17.0",
     "@monchilin/react-native-dropdown": "^0.2.3",
+    "@react-native-async-storage/async-storage": "^1.17.10",
     "@react-navigation/drawer": "^6.4.4",
     "@react-navigation/native": "^6.0.12",
     "@react-navigation/native-stack": "^6.8.0",
@@ -18,8 +19,6 @@
     "eslint-plugin-react-native": "^4.0.0",
     "expo": "~46.0.9",
     "expo-status-bar": "~1.4.0",
-    "install": "^0.13.0",
-    "npm": "^8.19.1",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-native": "0.69.5",
