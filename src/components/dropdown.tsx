@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { StyleSheet} from 'react-native';
+import React, { useEffect, useState } from "react";
+import { Image, Text, FlatList, StyleSheet, ListRenderItemInfo} from 'react-native';
 import { SelectCountry } from 'react-native-element-dropdown';
-import { forbiddenAccess, serviceAPI } from '../services/api-service';
+import { Articles, forbiddenAccess, serviceAPI } from '../services/api-service';
 import { TopNews } from '../services/api-service';
 
 
@@ -44,11 +44,11 @@ const local_data = [
     },
 ];
 
-interface Props {}
 
-const SelectCountryScreen: React.FC<Props> = _props => {
+export default function SelectCountryScreen() {
     const [country, setCountry] = useState('br');
-    const [article, setArticles] = useState<TopNews[]>([]);
+    const [news, setNews] = useState<TopNews[]>([]);
+    const [content, setContent] = useState('');
 
 
     async function getArticles() {
@@ -60,7 +60,7 @@ const SelectCountryScreen: React.FC<Props> = _props => {
             }
 
 
-            setArticles(res.articles);
+            setNews(res);
 
         } catch(err) {
 
@@ -73,7 +73,23 @@ const SelectCountryScreen: React.FC<Props> = _props => {
 
     }
 
-    
+    useEffect(() => {
+        getArticles();
+    }, []);
+
+
+    console.log('aqui ', news.map((item: TopNews) => {
+        return item.content;
+    }));
+
+    function renderItem({ item }: ListRenderItemInfo<TopNews>) {
+        return (
+            <>
+                <Text style={{ marginTop: 20, borderBottomColor: "#fff", borderBottomWidth: 1}}>{item.content}</Text>
+                <Image source={{ uri: item.urlToImage}} style={{ width: 200, height: 100}}/>
+            </>
+        );
+    }
 
 
     return (
@@ -98,14 +114,17 @@ const SelectCountryScreen: React.FC<Props> = _props => {
                 }}
             />
 
+            <FlatList
+                data={news}
+                renderItem={renderItem}
+            />
+
 
         </>
 
     );
-};
+}
 
-export {Props};
-export default SelectCountryScreen;
 
 const styles = StyleSheet.create({
     dropdown: {

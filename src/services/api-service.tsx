@@ -14,10 +14,8 @@ class forbiddenAccess extends ExtendableError {
 }
 
 interface TopNews {
-    articles:[]
     id?:string
     name:string
-    status?:string
     author?: string
     title?: string
     description?: string
@@ -25,6 +23,11 @@ interface TopNews {
     urlToImage?:string
     publishedAt?:string
     content?:string
+}
+
+interface Articles {
+    articles: TopNews,
+    status?:string
 }
 
 
@@ -44,11 +47,10 @@ class ServiceAPI {
      * @returns This function returns the headline news search by country selected
      * @throws {forbiddenAccess} Will throw an error if  the server return a error
      *
-*/
-    async getArticles(country: string): Promise<TopNews> {
-        const res = await fetch(`http://newsapi.org/v2/top-headlines?country=${country}&apiKey=176ab900d9ce4bd68b874e4ce3a509f8`, {
+    */
+    async getArticles(country: string): Promise<TopNews[]> {
+        const res = await fetch(`http://newsapi.org/v2/top-headlines?country=br&apiKey=176ab900d9ce4bd68b874e4ce3a509f8`, {
             method: "GET",
-            headers: this.getHeaders('application/json')
 
         });
 
@@ -56,13 +58,23 @@ class ServiceAPI {
             throw new forbiddenAccess('Desculpe, ocorreru um erro  em nosso servidor...');
         }
         console.log(res);
-        const content_article= res.json();
-        console.log(content_article);
-        return content_article;
+
+        const response = await res.json();
+
+        return response.articles.map((item: TopNews) => {
+            return {
+                id: item.id,
+                author: item.author,
+                content: item.content,
+                description: item.description,
+                name: item.name,
+                urlToImage: item.urlToImage
+            };
+        });
     }
 
 }
 
 export const serviceAPI = new ServiceAPI();
-export { TopNews, forbiddenAccess };
+export { TopNews, forbiddenAccess, Articles };
 
